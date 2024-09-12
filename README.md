@@ -125,29 +125,32 @@ Here is an excerpt from the [`CandlestickChart.tsx`](command:_github.copilot.ope
 ```tsx
 // Define the Data Interface
 interface CandlestickData {
-    t: number; // timestamp
+    x: number; // timestamp
     o: number; // open
     h: number; // high
     l: number; // low
     c: number; // close
 }
 
-const CandlestickChart: React.FC<CandlestickChartProps> = ({ width = 700, height = 400 }) => {
-    const [data, setData] = useState<CandlestickData[]>([]);
+const CandleChart = () => {
+    const [candlestickData, setCandlestickData] = useState<ChartData<'candlestick'>>({ datasets: [] });
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/candlestick-data/')
             .then(response => {
-                const formattedData = response.data.map((item: any) => ({
-                    t: new Date(item.x).getTime(), // Converts date string to timestamp
-                    o: item.o,
-                    h: item.h,
-                    l: item.l,
-                    c: item.c,
-                }));
-                setData(formattedData);
+                const fetchedData: CandlestickData[] = response.data;
+                setCandlestickData({
+                    datasets: [
+                        {
+                            label: 'Candlestick Chart',
+                            data: fetchedData,
+                            borderColor: 'rgba(75,192,192,1)',
+                            backgroundColor: 'rgba(75,192,192,0.2)',
+                        },
+                    ],
+                });
             })
             .catch(error => {
-                console.error('Error fetching candlestick data:', error);
+                console.error('Error fetching candlestick chart data:', error);
             });
     }, []);
