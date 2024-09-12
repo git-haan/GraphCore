@@ -29,7 +29,7 @@ interface BarChartProps {
     height?: number;
 }
 
-const BarChart: React.FC<BarChartProps> = ({ width = 700, height = 400 }) => {
+const BarChart = ({ width = 700, height = 400 }: BarChartProps) => {
     const [barData, setBarData] = useState<ChartData<'bar'>>({ datasets: [] });
 
     useEffect(() => {

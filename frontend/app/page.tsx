@@ -12,6 +12,10 @@ const Dashboard = () => {
             <h1 className="text-3xl font-bold mb-6 text-center">Dashboard</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-white p-4 rounded-lg shadow-md">
+                    <h2 className="text-xl font-semibold mb-4 text-center">Candlestick Chart</h2>
+                    <CandlestickChart />
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-md">
                     <h2 className="text-xl font-semibold mb-4 text-center">Line Chart</h2>
                     <LineChart />
                 </div>
@@ -22,10 +26,6 @@ const Dashboard = () => {
                 <div className="bg-white p-4 rounded-lg shadow-md">
                     <h2 className="text-xl font-semibold mb-4 text-center">Pie Chart</h2>
                     <PieChart />
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-md">
-                    <h2 className="text-xl font-semibold mb-4 text-center">Candlestick Chart</h2>
-                    <CandlestickChart />
                 </div>
             </div>
         </div>

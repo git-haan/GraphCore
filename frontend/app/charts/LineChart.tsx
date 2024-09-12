@@ -31,7 +31,7 @@ interface LineChartProps {
     height?: number;
 }
 
-const LineChart: React.FC<LineChartProps> = ({ width = 700, height = 400 }) => {
+const LineChart = ({ width = 700, height = 400 }: LineChartProps) => {
     const [lineData, setLineData] = useState<ChartData<'line'>>({ datasets: [] });
 
     useEffect(() => {

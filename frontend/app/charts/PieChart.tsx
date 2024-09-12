@@ -23,7 +23,7 @@ interface PieChartProps {
     height?: number;
 }
 
-const PieChart: React.FC<PieChartProps> = ({ width = 400, height = 400 }) => {
+const PieChart = ({ width = 400, height = 400 }: PieChartProps) => {
     const [pieData, setPieData] = useState<ChartData<'pie'>>({ datasets: [] });
 
     useEffect(() => {

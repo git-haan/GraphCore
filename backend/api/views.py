@@ -7,11 +7,9 @@ from rest_framework.response import Response
 def candlestick_data(request):
     data = [
         # Hardcoded data for candlestick chart
-        {"x": "2023-01-01", "open": 30, "high": 40, "low": 25, "close": 35},
-        {"x": "2023-01-02", "open": 35, "high": 45, "low": 30, "close": 40},
-        {"x": "2023-01-03", "open": 40, "high": 50, "low": 35, "close": 45},
-        {"x": "2023-01-04", "open": 45, "high": 55, "low": 40, "close": 50},
-        {"x": "2023-01-05", "open": 50, "high": 60, "low": 45, "close": 55},
+        {"x": 1672617600000, "o": 30, "h": 40, "l": 25, "c": 35},
+        {"x": 1672704000000, "o": 35, "h": 45, "l": 30, "c": 40},
+        {"x": 1672790400000, "o": 40, "h": 50, "l": 35, "c": 45},
     ]
     return Response(data)
 

@@ -8,6 +8,7 @@ import {
     TimeScale,
     Tooltip,
     Legend,
+    ChartData,
 } from 'chart.js';
 import { CandlestickController, CandlestickElement } from 'chartjs-chart-financial';
 import 'chartjs-adapter-date-fns';
@@ -31,47 +32,35 @@ interface CandlestickChartProps {
 
 // Define the Data Interface
 interface CandlestickData {
-    t: number; // timestamp
+    x: number; // timestamp
     o: number; // open
     h: number; // high
     l: number; // low
     c: number; // close
 }
 
-const CandlestickChart: React.FC<CandlestickChartProps> = ({ width = 700, height = 400 }) => {
-    const [data, setData] = useState<CandlestickData[]>([]);
+const CandleChart = ({ width = 700, height = 400 }: CandlestickChartProps) => {
+    const [candlestickData, setCandlestickData] = useState<ChartData<'candlestick'>>({ datasets: [] });
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/candlestick-data/')
             .then(response => {
-                const formattedData = response.data.map((item: any) => ({
-                    t: new Date(item.x).getTime(), // Convert date string to timestamp
-                    o: item.o,
-                    h: item.h,
-                    l: item.l,
-                    c: item.c,
-                }));
-                setData(formattedData);
+                const fetchedData: CandlestickData[] = response.data;
+                setCandlestickData({
+                    datasets: [
+                        {
+                            label: 'Candlestick Chart',
+                            data: fetchedData,
+                            borderColor: 'rgba(75,192,192,1)',
+                            backgroundColor: 'rgba(75,192,192,0.2)',
+                        },
+                    ],
+                });
             })
             .catch(error => {
-                console.error('Error fetching candlestick data:', error);
+                console.error('Error fetching candlestick chart data:', error);
             });
     }, []);
-
-    if (data.length === 0) {
-        return <div>Loading...</div>;
-    }
-
-    const chartData = {
-        datasets: [
-            {
-                label: 'Candlestick Chart',
-                data: data,
-                borderColor: 'rgba(75,192,192,1)',
-                backgroundColor: 'rgba(75,192,192,0.2)',
-            },
-        ],
-    };
 
     const options = {
         scales: {
@@ -87,11 +76,15 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ width = 700, height
         },
     };
 
+    if (candlestickData.datasets.length === 0) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div style={{ width: width, height: height }}>
-            <Chart type="candlestick" data={chartData} options={options}/>
+            <Chart type="candlestick" data={candlestickData} options={options} />
         </div>
     );
 };
 
-export default CandlestickChart;
+export default CandleChart;
