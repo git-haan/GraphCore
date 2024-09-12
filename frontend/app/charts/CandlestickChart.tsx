@@ -24,12 +24,6 @@ ChartJS.register(
     CandlestickElement
 );
 
-// Define the Props Interface
-interface CandlestickChartProps {
-    width?: number;
-    height?: number;
-}
-
 // Define the Data Interface
 interface CandlestickData {
     x: number; // timestamp
@@ -39,7 +33,7 @@ interface CandlestickData {
     c: number; // close
 }
 
-const CandleChart = ({ width = 700, height = 400 }: CandlestickChartProps) => {
+const CandleChart = () => {
     const [candlestickData, setCandlestickData] = useState<ChartData<'candlestick'>>({ datasets: [] });
 
     useEffect(() => {
@@ -63,6 +57,7 @@ const CandleChart = ({ width = 700, height = 400 }: CandlestickChartProps) => {
     }, []);
 
     const options = {
+        responsive: true,
         scales: {
             x: {
                 type: 'time' as const,
@@ -81,7 +76,7 @@ const CandleChart = ({ width = 700, height = 400 }: CandlestickChartProps) => {
     }
 
     return (
-        <div style={{ width: width, height: height }}>
+        <div>
             <Chart type="candlestick" data={candlestickData} options={options} />
         </div>
     );

@@ -17,13 +17,8 @@ ChartJS.register(
     Legend
 );
 
-// Define the Props Interface
-interface PieChartProps {
-    width?: number;
-    height?: number;
-}
 
-const PieChart = ({ width = 400, height = 400 }: PieChartProps) => {
+const PieChart = () => {
     const [pieData, setPieData] = useState<ChartData<'pie'>>({ datasets: [] });
 
     useEffect(() => {
@@ -67,7 +62,7 @@ const PieChart = ({ width = 400, height = 400 }: PieChartProps) => {
     }
 
     return (
-        <div style={{ width: width, height: height }}>
+        <div>
             <Chart type="pie" data={pieData} />
         </div>
     );

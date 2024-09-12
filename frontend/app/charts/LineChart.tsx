@@ -25,13 +25,8 @@ ChartJS.register(
     Legend
 );
 
-// Define the Props Interface
-interface LineChartProps {
-    width?: number;
-    height?: number;
-}
 
-const LineChart = ({ width = 700, height = 400 }: LineChartProps) => {
+const LineChart = () => {
     const [lineData, setLineData] = useState<ChartData<'line'>>({ datasets: [] });
 
     useEffect(() => {
@@ -60,7 +55,7 @@ const LineChart = ({ width = 700, height = 400 }: LineChartProps) => {
     }
 
     return (
-        <div style={{ width: width, height: height }}>
+        <div>
             <Chart type="line" data={lineData} />
         </div>
     );

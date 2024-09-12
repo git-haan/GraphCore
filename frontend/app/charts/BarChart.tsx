@@ -23,13 +23,7 @@ ChartJS.register(
     Legend
 );
 
-// Define the Props Interface
-interface BarChartProps {
-    width?: number;
-    height?: number;
-}
-
-const BarChart = ({ width = 700, height = 400 }: BarChartProps) => {
+const BarChart = () => {
     const [barData, setBarData] = useState<ChartData<'bar'>>({ datasets: [] });
 
     useEffect(() => {
@@ -59,7 +53,7 @@ const BarChart = ({ width = 700, height = 400 }: BarChartProps) => {
     }
 
     return (
-        <div style={{ width: width, height: height }}>
+        <div>
             <Chart type="bar" data={barData} />
         </div>
     );
